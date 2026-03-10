@@ -1,102 +1,38 @@
 #include <iostream>
 using namespace std;
 
-class Banckaccount{
-    private:
-    int accountnumber;
-    string accountHolderName;
-    double balance;
+void swapByValue(int a, int b){
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
-    public:
-    void setaccountnumber(int accNo){
-        accountnumber = accNo;
-    }
+void swapByAddress(int *a, int *b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
-    void setaccountHolderName(string name){
-        accountHolderName = name;
-    }
-
-    void setbalnce(double bal){
-        balance = bal;
-    }
-
-    int getaccountnumber(){
-        return accountnumber;
-    }
-
-    string getaccountHolderName(){
-        return accountHolderName;
-    }
-
-    double getbalance(){
-        return balance;
-    }
-
-    void deposite(double amount){
-        balance = balance + amount;
-        cout << "Amount deposited succesfully.\n";
-    }
-
-    void withdraw(double amount){
-        if(amount <= balance){
-            balance = balance -amount;
-            cout << "withdrawal successsful.\n";
-        }else{
-            cout <<"insufficent balance\n";
-        }
-    }
-    void displayAccountdetails(){
-        cout << "Account number: "<< accountnumber<<endl;
-        cout << "Account Holder Name: "<< accountHolderName<<endl;
-        cout << "Balance: "<< balance<<endl;
-    }
-
-};
+void swapByReference(int &a, int &b){
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
 int main(){
-    Banckaccount acc;
-    int choice;
-    double amount;
+    int x = 10, y = 20;
 
-    acc.setaccountnumber(101);
-    acc.setaccountHolderName( "nitin");
-    acc.setbalnce(5000);
+    swapByValue(x,y);
+    cout << " swapByValue: x=" << x << " y=" << y << endl;
 
-    do{
-        cout << "\n---simple banking systeam---\n";
-         cout << "1. Deposit Money\n";
-        cout << "2. Withdraw Money\n";
-        cout << "3. Display Account Details\n";
-        cout << "4. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
+    swapByAddress(&x,&y);
+    cout << " swapByAddress: x=" << x << " y=" << y << endl;
 
-        switch(choice) {
+    swapByReference(x,y);
+    cout << " swapByReference: x=" << x << " y=" << y << endl;
 
-          case 1:
-            cout << "Enter amount to deposit: ";
-            cin >> amount;
-            acc.deposite(amount);
-            break;
-
-        case 2:
-            cout << "Enter amount to withdraw: ";
-            cin >> amount;
-            acc.withdraw(amount);
-            break;
-
-        case 3:
-            acc.displayAccountdetails();
-            break;
-
-        case 4:
-            cout << "Exiting program...\n";   
-            break;
-
-        default:
-        cout << "invalid choice\n";    
-    }
-
-}while(choice !=4);
-return 0;
+    return 0;
 }
+
+//In programming  languages like C++ a reference variable is not a separate copy of data,
+// it is simply a new name—an alias—for an existing memory location.
